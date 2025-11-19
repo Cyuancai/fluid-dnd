@@ -6,13 +6,16 @@ import useDraggable from './useDraggable';
 import { AddCssStylesToElement } from './utils/SetStyles';
 import {
 	DRAGGABLE_CLASS,
+	DROPPABLE_CLASS,
 	DRAGGING_CLASS,
 	DRAGGING_HANDLER_CLASS,
 	DROPPING_CLASS,
 	GRAB_CLASS,
 	GRABBING_CLASS,
-	HANDLER_CLASS
+	HANDLER_CLASS,
+	DISABLE_TRANSITION
 } from './utils/classes';
+import { TEMP_CHILD_CLASS } from './utils';
 
 const setDroppableGroupClass = (droppableGroupClass: string, droppable: HTMLElement) => {
 	droppableGroupClass && addMultipleClasses(droppable, droppableGroupClass);
@@ -22,13 +25,13 @@ const createDraggableCssStyles = () => {
 		`.${DRAGGABLE_CLASS}{touch-action:manipulation;user-select:none;box-sizing:border-box!important;-webkit-user-select:none;}`,
 		`.${HANDLER_CLASS}{pointer-events:auto!important;}`,
 		`.${GRAB_CLASS}{cursor:grab;}`,
-		'.temp-child{touch-action:none;pointer-events:none;box-sizing:border-box!important;}',
-		`.droppable{box-sizing:border-box!important;}`,
+		`.${TEMP_CHILD_CLASS}{touch-action:none;pointer-events:none;box-sizing:border-box!important;}`,
+		`.${DROPPABLE_CLASS}{box-sizing:border-box!important;}`,
 		`.${DRAGGING_CLASS}{position:fixed;z-index:5000;width:var(--fixedWidth)!important;height:var(--fixedHeight)!important;}`,
 		`.${DRAGGING_HANDLER_CLASS}{pointer-events:none!important;}`,
 		`.${DROPPING_CLASS}{pointer-events:none!important;}`,
 		`.${GRABBING_CLASS}{cursor:grabbing;}`,
-		`.disable-transition{transition:none!important;}`
+		`.${DISABLE_TRANSITION}{transition:none!important;}`
 	]);
 };
 export default function useDroppable<T>(
