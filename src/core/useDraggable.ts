@@ -54,7 +54,8 @@ export default function useDraggable<T>(
 		droppableClass,
 		onDragStart,
 		delayBeforeTouchMoveEvent,
-		coordinateTransform
+		coordinateTransform,
+		canDragFromElement
 	} = config;
 	const droppableGroupClass = getClassesList(droppableGroup)
 		.map((classGroup) => `droppable-group-${classGroup}`)
@@ -283,6 +284,11 @@ export default function useDraggable<T>(
 	const onmousedown = (moveEvent: MoveEvent, onLeaveEvent: OnLeaveEvent) => {
 		return (event: DragMouseTouchEvent) => {
 			if (!cursorIsOnChildDraggable(event, draggableElement)) {
+				return;
+			}
+			// 检查点击的元素是否可以拖动
+			const clickedElement = event.target;
+			if (clickedElement && IsHTMLElement(clickedElement as Element | Node | undefined) && !canDragFromElement(event, clickedElement as HTMLElement)) {
 				return;
 			}
 			ConfigHandler.updateScrolls(parent, droppableGroupClass);

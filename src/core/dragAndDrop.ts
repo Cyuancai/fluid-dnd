@@ -33,6 +33,7 @@ const getConfig = <T>(listCondig: ListCondig<T>, config?: Config<T>): CoreConfig
 		draggingClass: config?.draggingClass ?? 'dnd-dragging',
 		droppableClass: config?.droppableClass ?? 'dnd-droppable-hover',
 		isDraggable: config?.isDraggable ?? (() => true),
+		canDragFromElement: config?.canDragFromElement ?? (() => true),
 		onDragStart: config?.onDragStart ?? (() => {}),
 		onDragEnd: config?.onDragEnd ?? (() => {}),
 		onDragOver: config?.onDragOver ?? (() => {}),

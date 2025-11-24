@@ -1,3 +1,5 @@
+import type { DragMouseTouchEvent } from '../../index';
+
 export type DraggableElement = { index: number; draggableId: string } | { index: number };
 export type ListCondig<T> = {
 	removeAtEvent: (index: number, sync?: boolean) => T | undefined;
@@ -82,6 +84,14 @@ export interface Config<T> {
 	 * A function that returns whether a given element of the list is draggable.
 	 */
 	isDraggable?: (element: HTMLElement) => boolean;
+	/**
+	 * A function that determines whether dragging can start from the clicked element.
+	 * This function receives the drag event and the target element, and returns true if dragging is allowed.
+	 * @param event The drag mouse/touch event
+	 * @param element The element that was clicked
+	 * @returns true if dragging is allowed from this element, false otherwise
+	 */
+	canDragFromElement?: (event: DragMouseTouchEvent, element: HTMLElement) => boolean;
 	/**
 	 * A function that returns whether a given element of the list is draggable.
 	 */
@@ -173,6 +183,11 @@ export type CoreConfig<T> = {
 	 * A function that returns whether a given element of the list is draggable
 	 */
 	isDraggable: (element: HTMLElement) => boolean;
+	/**
+	 * A function that determines whether dragging can start from the clicked element.
+	 * This function receives the drag event and the target element, and returns true if dragging is allowed.
+	 */
+	canDragFromElement: (event: DragMouseTouchEvent, element: HTMLElement) => boolean;
 	/**
 	 * A function that is called when the draggable element starts being dragged.
 	 */
